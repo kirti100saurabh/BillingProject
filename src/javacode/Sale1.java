@@ -331,8 +331,7 @@ public class Sale1 extends JPanel{
 			}
 		});
 		panel.add(tfqua);
-		tfqua.setColumns(10);
-		
+		tfqua.setColumns(10);		
 		sp_prod_sale = new JScrollPane();
 		sp_prod_sale.setBorder(new TitledBorder(null, "Products To Sale", TitledBorder.LEADING, TitledBorder.TOP, null, Color.white));
 		sp_prod_sale.setBounds(356, 119, 449, 323);
