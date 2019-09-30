@@ -7,27 +7,10 @@ import com.teleteach.billing.vo.EmployeeVO;
 public class LoginService {
 	EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
-	public int validateAndGetDesignation(int id, String password){
-		EmployeeVO employeeVo = employeeDAO.getEmployeeByIdAndMobile1(id, password);
-		if(employeeVo==null)
-		{
-			return 0;
-		}
-		else if(employeeVo.getDeg()==1)
-		{
-			return 1;
-		}
-		else if(employeeVo.getDeg()==2)
-		{
-			return 2;
-		} 
-		else if(employeeVo.getDeg()==3)
-		{
-			return 3;
-		} 
-		return -1;
+	public EmployeeVO validateAndGetEmployeeDetail(int id, String password)
+	{
+		EmployeeVO employeeVo = employeeDAO.getEmployeeByIdAndPassword(id, password);
+		return employeeVo;
 	}
-
-
-
 }
+

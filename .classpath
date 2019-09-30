@@ -11,7 +11,7 @@
 	<classpathentry kind="lib" path="lib/commons-javaflow-20060411.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/DynamicJasper-5.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/DynamicJasper-5.0.3.jar" sourcepath="lib/DynamicJasper-5.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-5.6.0.jar"/>
 	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="lib/swingx-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.17.jar"/>
 	<classpathentry kind="lib" path="lib/dsj.jar"/>
+	<classpathentry kind="lib" path="lib/org.apache.commons.beanutils.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

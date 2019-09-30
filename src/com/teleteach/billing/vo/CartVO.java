@@ -6,6 +6,13 @@ public class CartVO {
 	
 	CustomerVO customerVO;
 	List<ItemVO> itemList;
+	private int billNO;
+	public int getBillNO() {
+		return billNO;
+	}
+	public void setBillNO(int billNO) {
+		this.billNO = billNO;
+	}
 	public CustomerVO getCustomerVO() {
 		return customerVO;
 	}
@@ -20,7 +27,7 @@ public class CartVO {
 	}
 	@Override
 	public String toString() {
-		return "CartVO [customerVO=" + customerVO + ", itemList=" + itemList + "]";
+		return "CartVO [customerVO=" + customerVO + ", itemList=" + itemList + ", billNO=" + billNO + "]";
 	}
 	
 }

@@ -33,9 +33,6 @@ import javax.swing.ImageIcon;
 
 public class Sale1 extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int prod,cust;
 	private double bill;
@@ -163,8 +160,7 @@ public class Sale1 extends JPanel{
 								+ "," + tfcustid.getText() + "," + bill
 								+ ",curdate(),"+tfDisc.getText()+","+bill+")");
 						s.execute("insert into CustomerDebit values("+CustomerPurchase.calc()+","+tfbillno.getText()+","+tfCash.getText()+",curdate())");
-						for (int i = 0; i < v_prods.size(); i++) {
-	
+						for (int i = 0; i < v_prods.size(); i++) {	
 							s.execute("insert into cust_purch values("
 									+ v_prods.get(i).get(0) + "," +  tfbillno.getText()
 									+ "," + v_prods.get(i).get(2) + ")");

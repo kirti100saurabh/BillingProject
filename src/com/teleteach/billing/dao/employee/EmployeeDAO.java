@@ -8,7 +8,7 @@ public interface EmployeeDAO {
 	
 	public List<EmployeeVO> getAllEmployee();
 	public EmployeeVO getEmployeeById(int id);
-	public EmployeeVO getEmployeeByIdAndMobile1(int id, String password);
+	public EmployeeVO getEmployeeByIdAndPassword(int id, String password);
 	
 
 }

@@ -1,4 +1,4 @@
-package com.teleteach.billing.dao.employee;
+package com.teleteach.billing.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class DataSource {
 	private String password;
 	
 	
-	DataSource(){
+	public DataSource(){
 		loadDbProperties();
 	}
 	

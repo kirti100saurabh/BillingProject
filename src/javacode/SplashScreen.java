@@ -10,15 +10,12 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JWindow;
 import javax.swing.Timer;
 
 import com.teleteach.billing.view.LoginView;
-
-import groovyjarjarasm.asm.Label;
 
 class SplashScreen extends JWindow {
 

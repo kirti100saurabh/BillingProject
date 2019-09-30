@@ -17,8 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.teleteach.billing.service.LoginService;
-
-import javacode.Main4;
+import com.teleteach.billing.vo.EmployeeVO;
 
 public class LoginView extends JPanel 
 {
@@ -28,26 +27,28 @@ public class LoginView extends JPanel
 	private JPasswordField passwords;
 
 
-	public static void main(String[] args) throws ParseException {
-		/*ConnectToDataBase.main(null);
-			Main4.setNimbus();*/
+	public static void main(String[] args) throws ParseException
+	{
 		create();
 	}
 	
-	public static void create() throws ParseException {
+	
+	
+	public static void create() throws ParseException 
+	{
 		f = new JFrame("Login");
 		f.getContentPane().add(new LoginView());
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		int width = gd.getDisplayMode().getWidth();
 		int height = gd.getDisplayMode().getHeight();
-
 		int w = 610, h = 300;
 		f.setLocation(width / 2 - (w / 2), height / 2 - (h / 2));
-
 		f.setSize(w, h);
 		f.setVisible(true);
 	}
 
+	
+	
 	public LoginView() throws ParseException {
 		
 		// this is for background
@@ -63,7 +64,6 @@ public class LoginView extends JPanel
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblLogin.setBounds(26, 26, 104, 27);
 		panel.add(lblLogin);
-		
 		loginId = new JTextField(16);
 		loginId.setBounds(157, 30, 78, 20);
 		panel.add(loginId);
@@ -104,12 +104,9 @@ public class LoginView extends JPanel
 				
 							 
 			LoginService loginService = new LoginService();
-			int designation=loginService.validateAndGetDesignation(id, password);
-			if (designation==1)
-			{
-				Main4.main(null);
-			}
-			System.out.println(designation);
+			EmployeeVO employeeVo=loginService.validateAndGetEmployeeDetail(id, password);
+			DashBoard dashBoard = new DashBoard();
+			dashBoard.populateDashBoard(employeeVo);
 			}
 		});
 			

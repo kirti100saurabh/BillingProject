@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.teleteach.billing.dao.DataSource;
 import com.teleteach.billing.dao.DbConstantQueries;
 import com.teleteach.billing.vo.EmployeeVO;
 
@@ -30,7 +31,7 @@ public class EmployeeDAOImpl implements EmployeeDAO, DbConstantQueries {
 	}
 
 	@Override
-	public EmployeeVO getEmployeeByIdAndMobile1(int id, String password) 
+	public EmployeeVO getEmployeeByIdAndPassword(int id, String password) 
 	{
 		EmployeeVO employeeVO = null;
 		try 
