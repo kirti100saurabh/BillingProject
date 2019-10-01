@@ -1,50 +1,56 @@
 package com.teleteach.billing.dao.repot;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.teleteach.billing.dao.DataSource;
 import com.teleteach.billing.dao.DbConstantQueries;
-import com.teleteach.billing.vo.SaleReportVO;
+import com.teleteach.billing.vo.PurchaseReportVO;
 
-public class SalesReportDAOImpl implements SalesReportDAO, DbConstantQueries {
+public class PurchaseReportDAOImpl implements PurchaseReportDAO, DbConstantQueries {
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	DataSource ds = new DataSource();
 	
 	@Override
-	public List<SaleReportVO> getSalesReport(int month, int startDate)
+	public List<PurchaseReportVO> getPurchaseReport(int month, int startDate)
 	{
-		SaleReportVO saleReportVO = null;
-		List<SaleReportVO> listSaleReport = new ArrayList<SaleReportVO>();
+		PurchaseReportVO purchaseReportVO = null;
+		List<PurchaseReportVO> listPurchaseReport = new ArrayList<PurchaseReportVO>();
 		try 
 		{
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SAlE_REPROT);
+			pstmt = con.prepareStatement(PURCHASE_REPORT);
 			pstmt.setInt(1,startDate );
 			pstmt.setInt(2, startDate+6);
 			pstmt.setInt(3, month);
 			rs = pstmt.executeQuery(); 			
 			while (rs.next()) 
 			{   
-				saleReportVO = new SaleReportVO();
+				purchaseReportVO = new PurchaseReportVO();
 				
-				String billNo = Integer.toString(rs.getInt("BILLNO"));
-				saleReportVO.setBillNo(billNo);
+				String GRNNO = Integer.toString(rs.getInt("GRNNO"));
+				purchaseReportVO.setGRNNO(GRNNO);
 				
-				saleReportVO.setCustomerName(rs.getString("CustomerName"));
+				purchaseReportVO.setSupplierName(rs.getString("SupplierName"));
 				
 				String billAmount = Integer.toString(rs.getInt("BILL"));
-				saleReportVO.setBillAmount(billAmount);
+				purchaseReportVO.setBILL(billAmount);
 				
-				saleReportVO.setDate(rs.getString("saledate"));
+				Time time = rs.getTime("PurchaseDate");
+				String PurchaseDate = new SimpleDateFormat("yyyyMMdd").format(time);
+				purchaseReportVO.setPurchaseDate("purchaseDate");
 				
-				listSaleReport.add(saleReportVO);			
+				
+				listPurchaseReport.add(purchaseReportVO);			
 			}
 		}
 		catch(SQLException e)
@@ -65,7 +71,7 @@ public class SalesReportDAOImpl implements SalesReportDAO, DbConstantQueries {
 				e.printStackTrace();
 			}                      
 		}
-		return listSaleReport;
+		return listPurchaseReport;
 		
 		
 	}

@@ -30,8 +30,8 @@ public class DataSource {
 	
 	private void loadDbProperties(){
 		try{
-			InputStream input = new FileInputStream("C:/Users/saket saurabh/workspace/billingProject/src/resource/application-DEV.properties");
-            Properties prop = new Properties();
+			InputStream input = new FileInputStream("C:/Users/Sanat Mishra/git/BillingProject/src/resource/application-DEV.properties");
+			Properties prop = new Properties();
 
             // load a properties file
             prop.load(input);

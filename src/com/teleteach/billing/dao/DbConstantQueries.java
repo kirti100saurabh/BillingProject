@@ -5,7 +5,11 @@ public interface DbConstantQueries {
 	
 	
 	public static final String CUSTOMER_REPORT = "select ID,NAME,MOBNO,sum(balance) as CREDIT, sum(amount) as DEBIT from"
-			+ " customr natural join sale1 natural join customerdebit where id <> 0 group by (id,name,mobno)order by id";
+			+ " customr natural join sale1 natural join customerdebit group by (id)order by id";
+	
+	public static final String PURCHASE_REPORT = "select GRNNO,SNAME as SupplierName,BILL,purch_date_time as PurchaseDate from"
+			+ " purchase1 natural join supplier where extract(day from purch_date_time) between ? AND ? and"
+			+ " extract(month from purch_date_time)=?";
 	
 	
 	public static final String SAlE_REPROT ="select BILLNO,NAME as CustomerName,BILL,sale_date as saledate from"

@@ -16,8 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.teleteach.billing.service.SalesReportService;
-import com.teleteach.billing.vo.SaleReportVO;
+import com.teleteach.billing.service.PurchaseReportService;
+import com.teleteach.billing.vo.PurchaseReportVO;
 
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
@@ -38,7 +38,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 import reports.ReportTemplate1;
 
-public class SaleWeekReport extends JPanel {
+public class PurchaseWeeklyReportView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private static JFrame f;
@@ -56,8 +56,8 @@ public class SaleWeekReport extends JPanel {
 	}
 
 	public static void create() {
-		f = new JFrame("Weekly Report");
-		f.getContentPane().add(new SaleWeekReport());
+		f = new JFrame("Purchase Weekly Report");
+		f.getContentPane().add(new PurchaseWeeklyReportView());
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		int width = gd.getDisplayMode().getWidth();
 		int height = gd.getDisplayMode().getHeight();
@@ -69,7 +69,7 @@ public class SaleWeekReport extends JPanel {
 		f.setVisible(true);
 	}
 
-	public SaleWeekReport() {
+	public PurchaseWeeklyReportView() {
 		setLayout(null);
 
 		JPanel panel = new JPanel();
@@ -96,17 +96,17 @@ public class SaleWeekReport extends JPanel {
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SalesReportService salesReportService = new SalesReportService();
-				List<SaleReportVO> reportRows = salesReportService.getSalesReport(
+				PurchaseReportService purchaseReportService = new PurchaseReportService();
+				List<PurchaseReportVO> reportRows = purchaseReportService.getPurchaseReport(
 						(Integer.parseInt("" + (monthsel.getSelectedIndex() + 1))),
 						(Integer.parseInt("" + comboBox.getSelectedItem()) + 1));
 				Vector<String> attr = new Vector<String>();
-				attr.add("billNo");
-				attr.add("customerName");
-				attr.add("billAmount");
-				attr.add("date");
+				attr.add("GRNNO");
+				attr.add("SupplierName");
+				attr.add("BILL");
+				attr.add("PurchaseDate");
 				if (reportRows != null) {
-					DynamicReport dr = getDynamicReport(attr, "Report Of Sales", "General Store");
+					DynamicReport dr = getDynamicReport(attr, "Report Of Purchase", "General Store");
 					JasperPrint jp = null;
 					try {
 

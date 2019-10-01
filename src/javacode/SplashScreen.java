@@ -72,7 +72,7 @@ class SplashScreen extends JWindow {
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}
-                   // Main4.main(null);
+                    //Main4.main(null);
 
                     setVisible(false);//swapped this around with timer1.stop()
 

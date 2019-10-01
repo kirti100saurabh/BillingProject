@@ -8,12 +8,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.SortedSet;
@@ -21,13 +17,10 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 import javax.swing.border.TitledBorder;
 
 import org.codehaus.groovy.tools.shell.Main;
@@ -37,9 +30,7 @@ import org.jdesktop.swingx.event.DateSelectionListener;
 
 import com.teleteach.billing.vo.EmployeeVO;
 
-import javacode.ConnectToDataBase;
 import reports.Reports;
-import reports.SaleWeek;
 import reports.SuppWeek;
 
 public class DashBoard extends JPanel
@@ -59,8 +50,7 @@ public class DashBoard extends JPanel
 	
 	String str[]={"Customer","Supplier","Company Details","Stock and Purchase","Sale","Search"};
 	String reports[]={"Customer","Purchase","Sale"};
-	private Statement st;
-
+	
 	private static JXMonthView monthView;
 	private JPanel pnlReport;
 	private JPanel pnlRecord;
@@ -138,7 +128,9 @@ public class DashBoard extends JPanel
 		myRef.setBounds(10,getHeight()-100,300,40);
 		myRef.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
 		bak.add(myRef);
-		
+		/*
+		calendar view
+		*/
 		monthView = new JXMonthView();
 		monthView.setDaysOfTheWeekForeground(Color.BLUE);
 		monthView.setDayForeground(Calendar.SUNDAY,Color.red);
@@ -184,20 +176,18 @@ public class DashBoard extends JPanel
 	//	AnalogClock an=new AnalogClock();
 		//an.setBounds(1138,522,200,200);
 		//bak.add(an);
-		
+	if(loggedInEmployee.getDeg()==1){
 		pnlReport = new JPanel();
 		pnlReport.setOpaque(false);
 		pnlReport.setBorder(new TitledBorder(null, "Get Report", TitledBorder.LEADING, TitledBorder.TOP,new Font("Comic Sans MS", Font.BOLD, 15), Color.white));
 		pnlReport.setBackground(new Color(255, 255, 255));
 		pnlReport.setBounds(800, 203, 185, 455);
 		bak.add(pnlReport);
-		
+		/*
+		Adding Customer Report Icon and its Action part
+		*/
+		if(loggedInEmployee.getDeg()==1){
 		btnCust = new JButton("");
-		btnCust.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Reports.getAllCust();
-			}
-		});
 		pnlReport.setLayout(new GridLayout(0, 1, 0, 0));
 		btnCust.setIcon(new ImageIcon(DashBoard.class.getResource("/image/cust.png")));
 		btnCust.setRolloverIcon(new ImageIcon(DashBoard.class.getResource("/image/cust1.png")));
@@ -205,6 +195,12 @@ public class DashBoard extends JPanel
 		btnCust.setContentAreaFilled(false);
 		btnCust.setBorder(new TitledBorder(null, "Customer Report", TitledBorder.LEADING, TitledBorder.TOP, new Font("Comic Sans MS", Font.BOLD, 15), Color.white));
 		pnlReport.add(btnCust);
+		btnCust.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CustomerReportView.create();
+			}
+		});
+		}
 		
 		btnPur = new JButton("");
 		btnPur.setRolloverIcon(new ImageIcon(DashBoard.class.getResource("/image/supp1.png")));
@@ -235,14 +231,14 @@ public class DashBoard extends JPanel
 		btnSal.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				SaleWeekReport.create();
+				SalesWeeklyReportView.create();
 			}
 		});		
 		pnlReport.add(btnSal);
 		}
 		
 		
-		
+	}	
 		pnlRecord = new JPanel();
 		pnlRecord.setBorder(new TitledBorder(null, "Record", TitledBorder.LEADING, TitledBorder.TOP,new Font("Comic Sans MS", Font.BOLD, 15), Color.white));
 		pnlRecord.setBounds(43, 203, 745, 455);
@@ -335,7 +331,7 @@ public class DashBoard extends JPanel
 		pnlRecord.add(btnSearch);
 		
 		JLabel btnLogo = new JLabel("");
-		btnLogo.setIcon(new ImageIcon(DashBoard.class.getResource("/image/logo5.png")));
+		btnLogo.setIcon(new ImageIcon(DashBoard.class.getResource("")));//("/image/logo5.png")));
 		btnLogo.setBounds(29, 17, 406, 123);
 		bak.add(btnLogo);
 	//	ClockWindow cw=new ClockWindow();
@@ -394,7 +390,7 @@ public class DashBoard extends JPanel
 		f=new JFrame("Welcome");
 		f.setIconImage(new ImageIcon(DashBoard.class.getResource("/image/icon.png")).getImage());
 	
-		addEscapeListener(f);
+		//addEscapeListener(f);
 		DashBoard home=new DashBoard();
 		home.designLayout(loggedInEmployee);
 		f.getContentPane().add(home);
@@ -411,7 +407,7 @@ public class DashBoard extends JPanel
 	
 		f.setVisible(true);
 	}
-	public static void addEscapeListener(final JFrame j) {
+	public static void addEscapeListener(final JFrame j) {/*
 	    ActionListener escListener = new ActionListener() {
 
 	        @Override
@@ -470,7 +466,7 @@ public class DashBoard extends JPanel
 	            KeyStroke.getKeyStroke("typed p"),
 	            JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-	}
+	*/}
 
 	
 	public static void setNimbus() {
