@@ -1,41 +1,43 @@
 package com.teleteach.billing.vo;
 
 public class PurchaseReportVO {
-	private String GRNNO;
-	private String SupplierName;
-	private String BILL;
-	private String PurchaseDate;
-	public String getGRNNO() {
-		return GRNNO;
+	private String grnNo;
+	private String supplierName;
+	private String bill;
+	private String purchaseDate;
+	public String getGrnNo() {
+		return grnNo;
 	}
-	public void setGRNNO(String gRNNO) {
-		GRNNO = GRNNO;
+	public void setGrnNo(String grnNo) {
+		this.grnNo = grnNo;
 	}
 	public String getSupplierName() {
-		return SupplierName;
+		return supplierName;
 	}
 	public void setSupplierName(String supplierName) {
-		SupplierName = supplierName;
+		this.supplierName = supplierName;
 	}
-	public String getBILL() {
-		return BILL;
+	public String getBill() {
+		return bill;
 	}
-	public void setBILL(String bILL) {
-		BILL = bILL;
+	public void setBill(String bill) {
+		this.bill = bill;
 	}
 	public String getPurchaseDate() {
-		return PurchaseDate;
+		return purchaseDate;
 	}
 	public void setPurchaseDate(String purchaseDate) {
-		PurchaseDate = purchaseDate;
+		this.purchaseDate = purchaseDate;
 	}
 	@Override
 	public String toString() {
-		return "PurchaseReportVO [GRNNO=" + GRNNO + ", SupplierName=" + SupplierName + ", BILL=" + BILL
-				+ ", PurchaseDate=" + PurchaseDate + "]";
+		return "PurchaseReportVO [grnNo=" + grnNo + ", supplierName=" + supplierName + ", bill=" + bill
+				+ ", purchaseDate=" + purchaseDate + "]";
 	}
 	
-	}
+}
+	
+	
 	
 
 

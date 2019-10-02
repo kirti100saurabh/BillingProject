@@ -1,11 +1,10 @@
-package com.teleteach.billing.dao.repot;
+package com.teleteach.billing.dao.report;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,16 +37,16 @@ public class PurchaseReportDAOImpl implements PurchaseReportDAO, DbConstantQueri
 				purchaseReportVO = new PurchaseReportVO();
 				
 				String GRNNO = Integer.toString(rs.getInt("GRNNO"));
-				purchaseReportVO.setGRNNO(GRNNO);
+				purchaseReportVO.setGrnNo(GRNNO);
 				
 				purchaseReportVO.setSupplierName(rs.getString("SupplierName"));
 				
 				String billAmount = Integer.toString(rs.getInt("BILL"));
-				purchaseReportVO.setBILL(billAmount);
+				purchaseReportVO.setBill(billAmount);
 				
-				Time time = rs.getTime("PurchaseDate");
-				String PurchaseDate = new SimpleDateFormat("yyyyMMdd").format(time);
-				purchaseReportVO.setPurchaseDate("purchaseDate");
+				Timestamp date = rs.getTimestamp("PurchaseDate");
+				String purchaseDate = new SimpleDateFormat("yyyy.MMMMM.dd hh:mm aaa").format(date);
+				purchaseReportVO.setPurchaseDate(purchaseDate);
 				
 				
 				listPurchaseReport.add(purchaseReportVO);			

@@ -2,8 +2,8 @@ package com.teleteach.billing.service;
 
 import java.util.List;
 
-import com.teleteach.billing.dao.repot.CustomerReportDAO;
-import com.teleteach.billing.dao.repot.CustomerReportDAOImpl;
+import com.teleteach.billing.dao.report.CustomerReportDAO;
+import com.teleteach.billing.dao.report.CustomerReportDAOImpl;
 import com.teleteach.billing.vo.CustomerReportVO;
 
 public class CustomerReportService 

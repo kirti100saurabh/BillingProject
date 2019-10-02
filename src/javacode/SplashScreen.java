@@ -66,13 +66,13 @@ class SplashScreen extends JWindow {
 
                 	 progressbar.setValue(count);
                 	count++;
-                	try {
+                	/*try {
                 		setVisible(false);
 						LoginView.create();
 					} catch (ParseException e) {
 						e.printStackTrace();
-					}
-                    //Main4.main(null);
+					}*/
+                    Main4.main(null);
 
                     setVisible(false);//swapped this around with timer1.stop()
 

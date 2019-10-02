@@ -1,4 +1,4 @@
-package com.teleteach.billing.dao.repot;
+package com.teleteach.billing.dao.report;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

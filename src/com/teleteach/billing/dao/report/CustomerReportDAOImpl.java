@@ -1,4 +1,4 @@
-package com.teleteach.billing.dao.repot;
+package com.teleteach.billing.dao.report;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,17 +32,17 @@ public class CustomerReportDAOImpl implements CustomerReportDAO, DbConstantQueri
 				customerReportVO = new CustomerReportVO();
 				
 				String id = Integer.toString(rs.getInt("id"));
-				customerReportVO.setId(rs.getString("id"));
+				customerReportVO.setId(id);
 				
 				customerReportVO.setName(rs.getString("name"));
 				
 				customerReportVO.setMobno(rs.getString("mobno"));
 				
 				String credit = Float.toString(rs.getFloat("credit"));
-				customerReportVO.setCredit(rs.getString("credit"));
+				customerReportVO.setCredit(credit);
 								
 				String debit = Float.toString(rs.getFloat("debit"));
-				customerReportVO.setCredit(rs.getString("debit"));
+				customerReportVO.setCredit(debit);
 				
 				
 				listCustomerReport.add(customerReportVO);			

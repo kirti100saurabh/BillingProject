@@ -101,10 +101,10 @@ public class PurchaseWeeklyReportView extends JPanel {
 						(Integer.parseInt("" + (monthsel.getSelectedIndex() + 1))),
 						(Integer.parseInt("" + comboBox.getSelectedItem()) + 1));
 				Vector<String> attr = new Vector<String>();
-				attr.add("GRNNO");
-				attr.add("SupplierName");
-				attr.add("BILL");
-				attr.add("PurchaseDate");
+				attr.add("grnNo");
+				attr.add("supplierName");
+				attr.add("bill");
+				attr.add("purchaseDate");
 				if (reportRows != null) {
 					DynamicReport dr = getDynamicReport(attr, "Report Of Purchase", "General Store");
 					JasperPrint jp = null;
