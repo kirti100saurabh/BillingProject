@@ -5,13 +5,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.sql.ResultSet;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Vector;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
@@ -29,12 +28,11 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 import com.teleteach.billing.service.ProductSearchService;
+import com.teleteach.billing.vo.DisplayProductVO;
 import com.teleteach.billing.vo.ProductSearchVO;
 
 class SearchProductView extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	static JFrame f;
 	JButton search, backbtn;
@@ -65,7 +63,6 @@ class SearchProductView extends JPanel {
 		});
 		
 		bak = new JLabel(new ImageIcon(SearchProductView.class.getResource("/images/bak5.jpg")));
-		//bak=new JPanel();
 		add(bak);
 		bak.setLayout(null);
 		setSize(800, 600);
@@ -78,15 +75,13 @@ class SearchProductView extends JPanel {
 		list = new JComboBox<String>(attr);
 		list.setBounds(200, 200, 150, 30);
 		bak.add(list);
-		//display();
+		display();
 		tf = new JTextField();
 		tf.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 		tf.setBounds(370, 200, 200, 30);
 		bak.add(tf);
 
-		// search=new JButton("SEARCH");
-
-		// search.setBounds(w+450,h+100,100,30);
+		
 		tf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<ProductSearchVO> listSearchProduct= null;
@@ -94,6 +89,11 @@ class SearchProductView extends JPanel {
 					if (list.getSelectedItem().equals("pname")){
 						ProductSearchService productSearchService = new ProductSearchService();
 						 listSearchProduct = productSearchService.searchProductByName(tf.getText());
+					}
+					else if(list.getSelectedItem().equals("pid")){
+						ProductSearchService productSearchService = new ProductSearchService();
+						int productId = Integer.parseInt(tf.getText());
+						listSearchProduct = productSearchService.searchProductById(productId);
 					}
 				
 					/*String st = "SELECT pid,pname,name,avail,prate FROM available1 natural join product1 natural join company1 where "
@@ -118,7 +118,8 @@ class SearchProductView extends JPanel {
 
 					for (ProductSearchVO productSearchVO: listSearchProduct) 
 					{
-						sv.add(productSearchVO.getGrnNo());
+						System.out.println(productSearchVO);
+						sv.add(productSearchVO.getProductId());
 						sv.add(productSearchVO.getProductName());
 						sv.add(productSearchVO.getSupplierName());
 						sv.add(productSearchVO.getQuantity());
@@ -127,15 +128,15 @@ class SearchProductView extends JPanel {
 						vv.add(new Vector<String>(sv));
 						sv.clear();
 					}
-					v.add("product_id");
-					v.add("product_name");
-					v.add("company");
+					v.add("productId");
+					v.add("productName");
+					v.add("supplierName");
 					v.add("quantity");
-					v.add("price");
+					v.add("productRate");
 
 					j = new JTable(vv, v);
 					pane.setVisible(false);
-					pane = new JScrollPane(j);
+ 					pane = new JScrollPane(j);
 					pane.setBounds(200, 300, 550, 250);
 					bak.add(pane);
 				} catch (Exception e1) {
@@ -200,40 +201,43 @@ class SearchProductView extends JPanel {
 	}
 
 	public void display() {
+		List<DisplayProductVO> listProduct= null;
 		try {
+			
+			ProductSearchService productSearchService = new ProductSearchService();
+			 listProduct = productSearchService.displayProduct();
+						
+			 j = new JTable();
+				Vector<Vector<String>> vv = new Vector<Vector<String>>();
+				Vector<String> v = new Vector<String>();
+				Vector<String> sv = new Vector<String>();
 
-			String st = "SELECT pid,pname,name,avail,prate FROM available1 natural join product1 natural join company1";
-			s.execute(st);
-			ResultSet rs = s.getResultSet();
+				for (DisplayProductVO displayProductVO: listProduct) 
+				{
+					System.out.println(displayProductVO);
+					
+					sv.add(displayProductVO.getProductId());
+					sv.add(displayProductVO.getProductName());
+					sv.add(displayProductVO.getSupplierName());
+					sv.add(displayProductVO.getAvailable());
+					sv.add(displayProductVO.getProductRate());
+					
+					vv.add(new Vector<String>(sv));
+					sv.clear();
+				}
+				v.add("productId");
+				v.add("productName");
+				v.add("supplierName");
+				v.add("Available");
+				v.add("productRate");
 
-			j = new JTable();
-	
-			Vector<Vector<String>> vv = new Vector<Vector<String>>();
-			Vector<String> v = new Vector<String>();
-			Vector<String> sv = new Vector<String>();
-
-			while (rs.next()) {
-
-				for (int k = 1; k <= 5; k++)
-					sv.add("" + rs.getString(k));
-
-				vv.add(new Vector<String>(sv));
-				sv.clear();
+				j = new JTable(vv, v);
+				pane = new JScrollPane(j);
+				pane.setBounds(200, 300, 550, 250);
+				bak.add(pane);
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
-			v.add("product_id");
-			v.add("product_name");
-			v.add("company");
-			v.add("quantity");
-			v.add("price");
-
-			j = new JTable(vv, v);
-			j.setAutoCreateRowSorter(true);
-			pane = new JScrollPane(j);
-			pane.setBounds(200, 300, 550, 250);
-			bak.add(pane);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			
 	}
 }

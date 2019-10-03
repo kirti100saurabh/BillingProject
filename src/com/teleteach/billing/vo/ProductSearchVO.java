@@ -7,7 +7,7 @@ public class ProductSearchVO {
 	private String productRate;
 	private String quantity;
 	private String supplierName;
-	public String getGrnNo() {
+	public String getGrnno() {
 		return grnNo;
 	}
 	public void setGrnNo(String grnNo) {
@@ -48,5 +48,7 @@ public class ProductSearchVO {
 		return "ProductSearchVO [grnNo=" + grnNo + ", productId=" + productId + ", productName=" + productName
 				+ ", productRate=" + productRate + ", quantity=" + quantity + ", supplierName=" + supplierName + "]";
 	}
+	
+	
 	
 }

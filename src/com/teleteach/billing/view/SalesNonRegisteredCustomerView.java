@@ -1,4 +1,4 @@
-package javacode;
+package com.teleteach.billing.view;
 
 
 import java.awt.EventQueue;
@@ -46,14 +46,14 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import javax.swing.border.BevelBorder;
 
-public class SaleByCash extends JPanel{
+public class SalesNonRegisteredCustomerView extends JPanel{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private static JFrame f;
-	protected static SaleByCash sale;
+	protected static SalesNonRegisteredCustomerView sale;
 	protected JTextArea tfId;
 	protected JTextField tfRate;
 	protected JTextField tfQua;
@@ -73,7 +73,7 @@ public class SaleByCash extends JPanel{
 	protected Vector<Vector<String>> v_chk;
 	protected JTextField tfFindNm1;
 	protected JTextField tfBarcode;
-	QRReader pnlbarcode;
+	//QRReader pnlbarcode;
 	protected JPanel pnlBill;
 	protected JLabel lblDiscount;
 	protected JLabel lblNetTotal;
@@ -87,8 +87,8 @@ public class SaleByCash extends JPanel{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main1.setNimbus();
-					ConnectToDataBase.main(null);
+						DashBoard.setNimbus();
+					//ConnectToDataBase.main(null);
 					create();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -103,7 +103,7 @@ public class SaleByCash extends JPanel{
 	public static void create() {
 		f = new JFrame("Sales To NonRegistered Customer");
 
-		f.setIconImage(new ImageIcon(Main1.class.getResource("/image/sale.png")).getImage());
+		f.setIconImage(new ImageIcon(DashBoard.class.getResource("/image/sale.png")).getImage());
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getDefaultScreenDevice();
 		int w = gd.getDisplayMode().getWidth();
@@ -112,7 +112,7 @@ public class SaleByCash extends JPanel{
 		f.setSize(900,600);
 		
 		f.setLocation(w/2-400, h/2-300);
-		sale=new SaleByCash();
+		sale=new SalesNonRegisteredCustomerView();
 		f.getContentPane().add(sale);
 		f.addWindowFocusListener(new WindowAdapter() {
 		   /* public void windowGainedFocus(WindowEvent e) {
@@ -120,10 +120,10 @@ public class SaleByCash extends JPanel{
 		    	sale.pnlbarcode.initDSCapture();
 		    	
 		    }*/
-		    public void windowLostFocus(WindowEvent e){
+		   /* public void windowLostFocus(WindowEvent e){
 		    	sale.pnlbarcode.getGraph().dispose();
 		    	sale.pnlbarcode.msg.setVisible(true);
-		    }
+		    }*/
 		    
 		});
 		/*if(f.isFocused())
@@ -133,11 +133,11 @@ public class SaleByCash extends JPanel{
 		*/
 		f.setVisible(true);
 	}
-	public SaleByCash() {
+	public SalesNonRegisteredCustomerView() {
 		
 		setLayout(null);
 		setBackground(new Color(166,71,255));
-		s=ConnectToDataBase.getS();
+		//s=ConnectToDataBase.getS();
 		billno=0;
 		
 		col=new Vector<String>();
@@ -289,7 +289,7 @@ public class SaleByCash extends JPanel{
 		pnlBill.add(lblBillNo);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(SaleByCash.class.getResource("/images/logo3.png")));
+		lblNewLabel.setIcon(new ImageIcon(SalesNonRegisteredCustomerView.class.getResource("/images/logo3.png")));
 		lblNewLabel.setBounds(40, 30, 187, 70);
 		add(lblNewLabel);
 		
@@ -307,12 +307,12 @@ public class SaleByCash extends JPanel{
 		AutoCompleteDecorator.decorate(tfFindNm1,l,false);
 		panel.add(tfFindNm1);
 		
-		pnlbarcode = new QRReader(null,null,this);
+		/*pnlbarcode = new QRReader(null,null,this);
 		pnlbarcode.setLayout(null);
 		pnlbarcode.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		pnlbarcode.setBounds(296, 16, 295, 158);
 		add(pnlbarcode);
-		
+		*/
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBorder(new TitledBorder(null, "Search By Barcode", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
@@ -448,7 +448,7 @@ public class SaleByCash extends JPanel{
 			JOptionPane.showMessageDialog(null, "Saved Successfully");
 
 			f.setVisible(false);
-			SaleByCash.main(null);
+			SalesNonRegisteredCustomerView.main(null);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			JOptionPane.showMessageDialog(null,

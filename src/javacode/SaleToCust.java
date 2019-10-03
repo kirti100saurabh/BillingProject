@@ -84,7 +84,7 @@ public class SaleToCust extends SaleByCash {
 			{
 				s.execute("insert into sale1 values(" + billno
 						+ ",0," + bill+ ",sysdate,"+tfDisc.getText()+","+id+")");
-				s.execute("insert into CustomerDebit values("+CustomerPurchase.calc()+","+billno+","+tfCash.getText()+",sysdate)");
+				s.execute("insert into CustomerDebit values("+CustomerPurchase.calc()+","+billno+","+tfCash.getText()+",curdate())");
 				for (int i = 0; i < data.size(); i++) {
 
 					s.execute("insert into cust_purch values("

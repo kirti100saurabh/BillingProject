@@ -308,6 +308,8 @@ public class DashBoard extends JPanel
 			//	SaleOption.create();
 			}
 		});
+		
+		
 		btnSales.setMnemonic('a');
 		btnSales.setRolloverIcon(new ImageIcon(DashBoard.class.getResource("/image/"+str[4]+"1.png")));
 		s="<html>S<strong style=\"font-family: Arial;font-size: 18px;\">"+"A"+"</strong>"+"les"+"</html>";
@@ -316,24 +318,30 @@ public class DashBoard extends JPanel
 		btnSales.setBorder(new TitledBorder(null, s, TitledBorder.CENTER, TitledBorder.TOP, new Font("Comic Sans MS", Font.BOLD, 15), Color.WHITE));
 		pnlRecord.add(btnSales);
 		
-		btnSearch = new JButton("");
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Search.create();
-			}
-		});
-		btnSearch.setMnemonic('e');
-		btnSearch.setRolloverIcon(new ImageIcon(DashBoard.class.getResource("/image/"+str[5]+"1.png")));
-		s="<html>S<strong style=\"font-family: Arial;font-size: 18px;\">"+"E"+"</strong>"+"earch"+"</html>";
-		btnSearch.setContentAreaFilled(false);
-		btnSearch.setIcon(new ImageIcon(DashBoard.class.getResource("/image/Search.png")));
-		btnSearch.setBorder(new TitledBorder(null, s, TitledBorder.CENTER, TitledBorder.TOP, new Font("Comic Sans MS", Font.BOLD, 15), Color.WHITE));
-		pnlRecord.add(btnSearch);
-		
+		// search button 
+		if(loggedInEmployee.getDeg()==1)
+		{
+			btnSearch = new JButton("");
+			btnSearch.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					SearchView.create();
+				}
+			});
+			btnSearch.setMnemonic('e');
+			btnSearch.setRolloverIcon(new ImageIcon(DashBoard.class.getResource("/image/"+str[5]+"1.png")));
+			s="<html>S<strong style=\"font-family: Arial;font-size: 18px;\">"+"E"+"</strong>"+"earch"+"</html>";
+			btnSearch.setContentAreaFilled(false);
+			btnSearch.setIcon(new ImageIcon(DashBoard.class.getResource("/image/Search.png")));
+			btnSearch.setBorder(new TitledBorder(null, s, TitledBorder.CENTER, TitledBorder.TOP, new Font("Comic Sans MS", Font.BOLD, 15), Color.WHITE));
+			pnlRecord.add(btnSearch);
+		}
 		JLabel btnLogo = new JLabel("");
 		btnLogo.setIcon(new ImageIcon(DashBoard.class.getResource("")));//("/image/logo5.png")));
 		btnLogo.setBounds(29, 17, 406, 123);
 		bak.add(btnLogo);
+		
 	//	ClockWindow cw=new ClockWindow();
 
 		
