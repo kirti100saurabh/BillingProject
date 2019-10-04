@@ -1,50 +1,43 @@
 package com.teleteach.billing.view;
 
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import java.awt.Color;
-
-import javax.swing.JLabel;
-
-import java.awt.Font;
-
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-
 import java.awt.SystemColor;
-import java.awt.FlowLayout;
-
-import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-import javax.swing.border.BevelBorder;
+import com.teleteach.billing.service.SalesService;
+import com.teleteach.billing.vo.SaleVO;
 
 public class SalesNonRegisteredCustomerView extends JPanel{
 
@@ -54,15 +47,15 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private static JFrame f;
 	protected static SalesNonRegisteredCustomerView sale;
-	protected JTextArea tfId;
-	protected JTextField tfRate;
-	protected JTextField tfQua;
-	protected JTextField tfPrice;
+	protected JTextArea textfeildId;
+	protected JTextField textFieldRate;
+	protected JTextField textFieldQuantity;
+	protected JTextField textFieldPrice;
 	protected JTable table;
-	protected JTextField tfTot;
+	protected JTextField textFieldTotal;
 	protected JTextField tfDisc;
 	protected JTextField tfNetTot;
-	protected JTextField tfName;
+	protected JTextField textFieldName;
 	protected Statement s;
 	protected int billno;
 	protected JLabel lblBillNo;
@@ -159,12 +152,12 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 		add(pnlId);
 		
 		JLabel lblProductId = new JLabel("Product ID :");
-		lblProductId.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		lblProductId.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
 		pnlId.add(lblProductId);
 		
-		tfId = new JTextArea();
-		pnlId.add(tfId);
-		tfId.setColumns(10);
+		textfeildId = new JTextArea();
+		pnlId.add(textfeildId);
+		textfeildId.setColumns(10);
 		
 		addListMapTotfId();
 		
@@ -179,40 +172,40 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 		lblName.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		pnlDet.add(lblName);
 		
-		tfName = new JTextField();
-		tfName.setFocusable(false);
-		tfName.setEditable(false);
-		pnlDet.add(tfName);
-		tfName.setColumns(10);
+		textFieldName = new JTextField();
+		textFieldName.setFocusable(false);
+		textFieldName.setEditable(false);
+		pnlDet.add(textFieldName);
+		textFieldName.setColumns(10);
 		
 		JLabel lblQuantity = new JLabel("Rate  :");
 		lblQuantity.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		pnlDet.add(lblQuantity);
 		
-		tfRate = new JTextField();
-		tfRate.setEditable(false);
-		pnlDet.add(tfRate);
-		tfRate.setColumns(10);
+		textFieldRate = new JTextField();
+		textFieldRate.setEditable(false);
+		pnlDet.add(textFieldRate);
+		textFieldRate.setColumns(10);
 		
 		JLabel lblQuantity_1 = new JLabel("Quantity :");
 		lblQuantity_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		pnlDet.add(lblQuantity_1);
 		
-		tfQua = new JTextField();
-		tfQua.setColumns(10);
+		textFieldQuantity = new JTextField();
+		textFieldQuantity.setColumns(10);
 		addListMapTotfQua();
 
-		pnlDet.add(tfQua);
+		pnlDet.add(textFieldQuantity);
 		
 		JLabel lblPrice = new JLabel("Price  :");
 		lblPrice.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
 		pnlDet.add(lblPrice);
 		
-		tfPrice = new JTextField();
-		tfPrice.setEditable(false);
-		tfPrice.setFocusable(false);
-		tfPrice.setColumns(10);
-		pnlDet.add(tfPrice);
+		textFieldPrice = new JTextField();
+		textFieldPrice.setEditable(false);
+		textFieldPrice.setFocusable(false);
+		textFieldPrice.setColumns(10);
+		pnlDet.add(textFieldPrice);
 		
 		sp_prod = new JScrollPane();
 		
@@ -236,12 +229,12 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 		lblTotal.setBounds(45, 27, 55, 16);
 		pnlBill.add(lblTotal);
 		
-		tfTot = new JTextField();
-		tfTot.setFocusable(false);
-		tfTot.setEditable(false);
-		tfTot.setBounds(102, 22, 179, 28);
-		pnlBill.add(tfTot);
-		tfTot.setColumns(10);
+		textFieldTotal = new JTextField();
+		textFieldTotal.setFocusable(false);
+		textFieldTotal.setEditable(false);
+		textFieldTotal.setBounds(102, 22, 179, 28);
+		pnlBill.add(textFieldTotal);
+		textFieldTotal.setColumns(10);
 		
 		lblDiscount = new JLabel("Discount  :");
 		lblDiscount.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
@@ -325,7 +318,7 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 		panel_1.add(tfBarcode);
 		tfBarcode.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
-				tfId.setText(getIDfromBarcode());	
+				textfeildId.setText(getIDfromBarcode());	
 			}
 		});
 		tfFindNm1.addActionListener(new ActionListener() {
@@ -360,8 +353,8 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 	protected void setID() {
 		
 		String ID=getID(tfFindNm1.getText());
-		tfId.setText(ID);
-		tfId.requestFocus();
+		textfeildId.setText(ID);
+		textfeildId.requestFocus();
 	}
 	public String getIDfromBarcode() {
 		
@@ -434,15 +427,19 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 
 	protected void saveAll() {
 		try {
+			SalesService salesService = new SalesService();
+			int getDiscountText = Integer.parseInt(tfDisc.getText());
+			salesService.setIntoSales1Table(billno, bill, (float)getDiscountText);
+			/*
 			s.execute("insert into sale1 values(" + billno
-					+ ",0," + bill+ ",sysdate,"+tfDisc.getText()+",0)");
-			for (int i = 0; i < data.size(); i++) {
+					+ ",0," + bill+ ",sysdate,"+tfDisc.getText()+",0)");*/
+			/*for (int i = 0; i < data.size(); i++) {
 
 				s.execute("insert into cust_purch values("
 						+ data.get(i).get(0) + "," + billno
 						+ "," + data.get(i).get(3) + ")");
 
-			}
+			}*/
 			int res=JOptionPane.showConfirmDialog(null, "Are You Sure?");
 			if(!(res==1||res==2))
 			JOptionPane.showMessageDialog(null, "Saved Successfully");
@@ -460,12 +457,12 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 
 	private void addListMapTotfId() {
 		
-		tfId.addCaretListener(new CaretListener() {
+		textfeildId.addCaretListener(new CaretListener() {
 					
 					@Override
 					public void caretUpdate(CaretEvent e) {
 						
-						String id=tfId.getText();
+						String id=textfeildId.getText();
 		
 						if(id!=null&&id.length()>0){
 							showDetails();
@@ -475,25 +472,25 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 						}
 					}
 		});
-		tfId.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "action");
-		tfId.getActionMap().put("action", new AbstractAction() {
+		textfeildId.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "action");
+		textfeildId.getActionMap().put("action", new AbstractAction() {
 			
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tfQua.requestFocus();
+				textFieldQuantity.requestFocus();
 				
 			}
 		});
-		tfId.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "action1");
-		tfId.getActionMap().put("action1", new AbstractAction() {
+		textfeildId.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "action1");
+		textfeildId.getActionMap().put("action1", new AbstractAction() {
 			
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tfQua.requestFocus();
+				textFieldQuantity.requestFocus();
 				
 			}
 		});
@@ -501,42 +498,48 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 	}
 
 	protected void addListMapTotfQua() {
-		tfQua.addActionListener(new ActionListener() {
+		textFieldQuantity.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				check();
+				quantityCheck();
 				
 			}
 		});
 		
 	}
 
-	protected void check() {
+	protected void quantityCheck() {
 		try
 		{
-			ResultSet rs=s.executeQuery("select avail from Available1 where pid="+tfId.getText());
-			rs.next();
-			if(Integer.parseInt(rs.getString(1))<Integer.parseInt(tfQua.getText())){
-				JOptionPane.showMessageDialog(null, "Insufficient quantity in Stock:Available "+rs.getString(1),
+			SalesService salesService = new SalesService();
+			int getText = Integer.parseInt(textfeildId.getText());
+			salesService.getProductQuantity(getText);
+			/*tfName.setText(SaleVO.getProductQuantity()());
+			tfRate.setText(productRateText);*/
+				
+			/*ResultSet rs=s.executeQuery("select avail from Available1 where pid="+tfId.getText());
+			rs.next();*/
+			if(SaleVO.getProductQuantity()<Integer.parseInt(textFieldQuantity.getText())){
+				JOptionPane.showMessageDialog(null, "Insufficient quantity in Stock:Available "+SaleVO.getProductQuantity(),
 						"error", JOptionPane.WARNING_MESSAGE);
 				
 			}
 			else{
 				
-				Double rate=Double.parseDouble(tfRate.getText());
-				Double subtot=Integer.parseInt(tfQua.getText())*rate;
-				tfPrice.setText(""+subtot);
+				Double rate=Double.parseDouble(textFieldRate.getText());
+				Double subtot=Integer.parseInt(textFieldQuantity.getText())*rate;
+				textFieldPrice.setText(""+subtot);
 				bill+=subtot;
-				tfTot.setText(""+bill);
+				textFieldTotal.setText(""+bill);
 				
 				Vector<String> v=new Vector<String>();
-				v.add(tfId.getText());
-				v.add(tfName.getText());
-				v.add(tfRate.getText());
+				v.add(textfeildId.getText());
+				v.add(textFieldName.getText());
+				v.add(textFieldRate.getText());
 				
 				
-				String qua=tfQua.getText();
+				String qua=textFieldQuantity.getText();
 				v_chk=new Vector<Vector<String>>(data);
 				for(int i=0;i<data.size();i++){
 					if(v.get(0).equals(data.get(i).get(0))){
@@ -550,7 +553,7 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 				data=v_chk;
 				
 				v.add(qua);
-				v.add(tfPrice.getText());
+				v.add(textFieldPrice.getText());
 				data.add(v);
 				
 				table=new JTable(data,col);
@@ -558,8 +561,8 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 				sp_prod.setViewportView(table);
 				
 			}
-			tfQua.setText("0");
-			tfId.requestFocus();
+			textFieldQuantity.setText("0");
+			textfeildId.requestFocus();
 			
 		}catch (Exception e) {
 			
@@ -573,12 +576,24 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 	protected void showDetails() {
 			
 		try {
+				SalesService salesService = new SalesService();
+			/*	List<SaleVO> listNameAndRate = new ArrayList<SaleVO>();*/
 				
-				s.execute("select pname,prate from product1 where pid="+tfId.getText());
+				
+				int getText = Integer.parseInt(textfeildId.getText());
+				
+				/*listNameAndRate =*/ salesService.getNameAndRate(getText);
+				//System.out.println(listNameAndRate);
+				
+				
+				String productRateText = Float.toString(SaleVO.getProductRate());
+				textFieldName.setText(SaleVO.getProductName());
+				textFieldRate.setText(productRateText);
+				/*s.execute("select pname,prate from product1 where pid="+tfId.getText());
 				ResultSet rs = s.getResultSet();
 				rs.next();
 				tfName.setText(rs.getString(1));
-				tfRate.setText(rs.getString(2));
+				tfRate.setText(rs.getString(2));*/
 			} 
 			catch (Exception e) {
 		
@@ -592,16 +607,8 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 		
 		
 		try {
-
-			String st = "SELECT max(billno) FROM sale1";
-			s.execute(st);
-			ResultSet rs = s.getResultSet();
-
-			while (rs.next()) {
-				String d = rs.getString(1);
-				billno = Integer.parseInt(d);
-
-			}
+			SalesService salesService = new SalesService();
+			billno =  salesService.maxBillNo();
 			billno += 1;
 			lblBillNo.setText("Bill No : "+billno);
 		} catch (Exception e) {
@@ -617,12 +624,12 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 		try{
 			
 			tfDisc.setText("");
-			tfId.setText("");
-			tfName.setText("");
-			tfPrice.setText("");
-			tfQua.setText("");
-			tfRate.setText("");
-			tfTot.setText("");
+			textfeildId.setText("");
+			textFieldName.setText("");
+			textFieldPrice.setText("");
+			textFieldQuantity.setText("");
+			textFieldRate.setText("");
+			textFieldTotal.setText("");
 		}catch(Exception e){}
 		
 	}

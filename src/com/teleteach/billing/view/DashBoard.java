@@ -30,8 +30,8 @@ import org.jdesktop.swingx.event.DateSelectionListener;
 
 import com.teleteach.billing.vo.EmployeeVO;
 
-import reports.Reports;
-import reports.SuppWeek;
+
+
 
 public class DashBoard extends JPanel
 {
@@ -213,7 +213,7 @@ public class DashBoard extends JPanel
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SuppWeek.create();
+				//SuppWeek.create();
 				
 			}
 		});
@@ -305,7 +305,7 @@ public class DashBoard extends JPanel
 		btnSales = new JButton("");
 		btnSales.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	SaleOption.create();
+				SaleOption.create();
 			}
 		});
 		

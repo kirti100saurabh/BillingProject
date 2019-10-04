@@ -1,7 +1,5 @@
 package com.teleteach.billing.dao;
 
-import javacode.CustomerPurchase;
-
 public interface DbConstantQueries {
 	public static final String GET_EMPLOYEE_BY_ID_DOB = "select * from employee where id=? and password=? and del_flag='N'";
 	
@@ -30,21 +28,18 @@ public interface DbConstantQueries {
 			+ " product1 natural join prod_purch natural join purchase1 natural join supplier where pname"
 			+ " like ?";
 	public static final String SEARCH_BY_PRODUCT_BARCODE ="select pid from product1 where barcode = ?";
-	
+	public static final String CHECK_PRODUCT_AVAILABILITY = "select avail from Available1 where pid = ?";
 	
 	/* Queries for sales */
 			public static final String MAX_BILL_NO = "SELECT MAX(billno) FROM sale1";
 			public static final String DISTINCT_PRODUCTNAME = "select distinct pname from product1";
-			/*public static final String SEARCH_BY_PRODUCTID = "select pname,prate from product1 where pid="+tfId.getText());
-			public static final String SEARCH_BY_PRODUCTNAME = "select pid from product1 where pname='"+name+"'");
-			public static final String SEARCH_BY_PRODUCTBARCODE ="select pid from product1 where barcode='"+st+"'");
+			public static final String SEARCH_BY_PRODUCTID = "select pname,prate from product1 where pid= ?";//+tfId.getText());
+			/*public static final String SEARCH_BY_PRODUCTNAME = "select pid from product1 where pname='"+name+"'");
+			public static final String SEARCH_BY_PRODUCTBARCODE ="select pid from product1 where barcode='"+st+"'");*/
 			
-			public static final String CHECK_PRODUCT_AVAILABILITY = ""select avail from Available1 where pid="+tfId.getText());"
-			
-			
-			public static final String SAVE_SALES_TO_SALES1 = "insert into sale1 values"
-					+ "(" + billno + ",0," + bill+ ",sysdate,"+tfDisc.getText()+","+id+")");
-			public static final String SAVE_SALES_TO_CUSTOMERDEBIT = ""insert into CustomerDebit values"
+						
+			public static final String SAVE_SALES_TO_SALES1 = "insert into sale1 values ( ? , 0 , ? , curdate() , ? , 0)";
+		/*	public static final String SAVE_SALES_TO_CUSTOMERDEBIT = ""insert into CustomerDebit values"
 					("+CustomerPurchase.calc()+","+billno+","+tfCash.getText()+",curdate());
 			public static final String SAVE_SALES_TO_CUSTOMERPURCHASE = "insert into cust_purch values("
 					+ data.get(i).get(0) + "," + billno + "," + data.get(i).get(3) + ")");
