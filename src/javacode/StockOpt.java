@@ -307,7 +307,7 @@ public class StockOpt extends JPanel{
 					
 						s.execute("insert into purchase1 values("
 								+ grn + "," + tfSupp.getText()
-								+ "," + bill + ",sysdate,"+tfOrder.getText()+")");
+								+ "," + bill + ",curdate(),"+tfOrder.getText()+")");
 						for (int i = 0; i < vv1.size(); i++) {
 	
 							s.execute("insert into prod_purch values("

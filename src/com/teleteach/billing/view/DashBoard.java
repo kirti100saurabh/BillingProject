@@ -305,7 +305,7 @@ public class DashBoard extends JPanel
 		btnSales = new JButton("");
 		btnSales.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SaleOption.create();
+				SaleOptionView.create();
 			}
 		});
 		

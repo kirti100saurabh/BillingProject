@@ -80,8 +80,7 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-						DashBoard.setNimbus();
-					//ConnectToDataBase.main(null);
+					DashBoard.setNimbus();
 					create();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -442,8 +441,9 @@ public class SalesNonRegisteredCustomerView extends JPanel{
 			}*/
 			int res=JOptionPane.showConfirmDialog(null, "Are You Sure?");
 			if(!(res==1||res==2))
-			JOptionPane.showMessageDialog(null, "Saved Successfully");
-
+			JOptionPane.showMessageDialog(null, "Saved Successfully and Invoice is genrated on Desktop");
+			InvoicePDFView generateInvoice = new InvoicePDFView();
+			generateInvoice.createPDF(billno);
 			f.setVisible(false);
 			SalesNonRegisteredCustomerView.main(null);
 		} catch (Exception e1) {

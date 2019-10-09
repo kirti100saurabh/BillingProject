@@ -160,7 +160,7 @@ public class Purchase3 extends JPanel{
 				try {
 					s.execute("insert into purchase1 values(" + tfbillno.getText()
 							+ "," + tfsid.getText() + "," + bill
-							+ ",sysdate,0)");
+							+ ",curdate(),0)");
 					for (int i = 0; i < v_prods.size(); i++) {
 
 						s.execute("insert into prod_purch values("
